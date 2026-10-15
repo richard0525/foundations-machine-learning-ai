@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+.cache/
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
