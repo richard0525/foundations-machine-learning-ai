@@ -1,0 +1,22 @@
+{
+  "seed": 42,
+  "test_fraction": 0.2,
+  "classification": {
+    "validation_fraction": 0.2,
+    "max_epochs": 2000,
+    "checkpoint_every": 10,
+    "batch_size": 32,
+    "learning_rate": 0.05,
+    "decay_epochs": 500
+  },
+  "regression": {
+    "epochs": 5000,
+    "checkpoint_every": 25,
+    "batch_size": 16,
+    "learning_rate": 0.02,
+    "decay_epochs": 100,
+    "student_t_df": 5,
+    "student_t_scale": 1.0
+  },
+  "normality_alpha": 0.05
+}
