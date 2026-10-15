@@ -21,7 +21,7 @@ cd foundations-machine-learning-ai
 python3.12 -m venv .venv
 .venv/bin/python -m pip install -r homework_1/requirements.txt
 .venv/bin/python homework_1/run.py
-.venv/bin/python -m unittest discover -s homework_1 -p 'test_*.py' -v
+.venv/bin/python -m unittest discover -s homework_1 -v
 .venv/bin/python homework_1/build_report.py
 ```
 
