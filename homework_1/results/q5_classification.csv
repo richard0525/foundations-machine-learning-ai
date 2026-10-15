@@ -1,0 +1,4 @@
+model,test_accuracy,correct,test_n,epochs
+"sklearn logistic (L2, C=1)",0.9824561403508771,112,114,0
+"PyTorch logistic (BCE, SGD)",0.9736842105263158,111,114,80
+"PyTorch probit (BCE, SGD)",0.9736842105263158,111,114,20

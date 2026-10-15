@@ -1,0 +1,115 @@
+{
+  "q4": [
+    {
+      "model": "OLS",
+      "test_n": 22,
+      "test_mae": 0.19539341641928845,
+      "test_rmse": 0.2705426739425091,
+      "normaltest_K2": 7.299712196986455,
+      "normaltest_p": 0.02599486921046974,
+      "shapiro_W": 0.9406644486916657,
+      "shapiro_p": 0.204271903303112,
+      "residual_mean": 0.04020202548423654,
+      "residual_sd": 0.2738349331223367,
+      "skewness": 0.984490820695012,
+      "excess_kurtosis": 2.151168170425283,
+      "normaltest_p_holm": 0.07798460763140921,
+      "reject_raw_0_05": true,
+      "reject_holm_0_05": false
+    },
+    {
+      "model": "RBF SVR",
+      "test_n": 22,
+      "test_mae": 0.2218356131388549,
+      "test_rmse": 0.33362569569029166,
+      "normaltest_K2": 12.338414588232972,
+      "normaltest_p": 0.0020928943928183617,
+      "shapiro_W": 0.8730064840731708,
+      "shapiro_p": 0.008908667492796816,
+      "residual_mean": 0.1378892920278317,
+      "residual_sd": 0.3109461946501569,
+      "skewness": 1.517624252628423,
+      "excess_kurtosis": 2.693947783075524,
+      "normaltest_p_holm": 0.008371577571273447,
+      "reject_raw_0_05": true,
+      "reject_holm_0_05": true
+    },
+    {
+      "model": "Decision tree",
+      "test_n": 22,
+      "test_mae": 0.1880954058550353,
+      "test_rmse": 0.2519761938220267,
+      "normaltest_K2": 1.8142472672546373,
+      "normaltest_p": 0.403683697912266,
+      "shapiro_W": 0.9557996712606076,
+      "shapiro_p": 0.4092989596254009,
+      "residual_mean": 0.050758024427230236,
+      "residual_sd": 0.2526190200021864,
+      "skewness": -0.31372019367439286,
+      "excess_kurtosis": 1.0279419725175423,
+      "normaltest_p_holm": 0.807367395824532,
+      "reject_raw_0_05": false,
+      "reject_holm_0_05": false
+    },
+    {
+      "model": "Random forest",
+      "test_n": 22,
+      "test_mae": 0.19757350274759566,
+      "test_rmse": 0.25149616357064025,
+      "normaltest_K2": 1.5511237537176,
+      "normaltest_p": 0.46044499491542523,
+      "shapiro_W": 0.9386620155503492,
+      "shapiro_p": 0.18572524531091078,
+      "residual_mean": 0.08526774252586551,
+      "residual_sd": 0.2421681934461534,
+      "skewness": 0.5218879629324689,
+      "excess_kurtosis": -0.5959293952812783,
+      "normaltest_p_holm": 0.807367395824532,
+      "reject_raw_0_05": false,
+      "reject_holm_0_05": false
+    }
+  ],
+  "q5_classification": [
+    {
+      "model": "sklearn logistic (L2, C=1)",
+      "test_accuracy": 0.9824561403508771,
+      "correct": 112,
+      "test_n": 114,
+      "epochs": 0
+    },
+    {
+      "model": "PyTorch logistic (BCE, SGD)",
+      "test_accuracy": 0.9736842105263158,
+      "correct": 111,
+      "test_n": 114,
+      "epochs": 80
+    },
+    {
+      "model": "PyTorch probit (BCE, SGD)",
+      "test_accuracy": 0.9736842105263158,
+      "correct": 111,
+      "test_n": 114,
+      "epochs": 20
+    }
+  ],
+  "q5_regression": [
+    {
+      "model": "sklearn OLS",
+      "test_mae": 0.19539341641928845,
+      "test_rmse": 0.2705426739425091,
+      "train_mse": 0.05058152174831563
+    },
+    {
+      "model": "PyTorch linear (mse, SGD)",
+      "test_mae": 0.19537290608229574,
+      "test_rmse": 0.27037045103609025,
+      "train_mse": 0.05058185649788434
+    },
+    {
+      "model": "PyTorch linear (student_t, SGD)",
+      "test_mae": 0.1940712792697682,
+      "test_rmse": 0.27270224274494603,
+      "train_mse": 0.05062664000080615
+    }
+  ]
+}
