@@ -16,6 +16,10 @@
 \begin{center}
 {\Large\bfseries Foundations of Machine Learning and AI}\\[4pt]
 {\large Homework 1 \quad | \quad Fall 2026}
+\\[4pt]
+{\small \href{https://github.com/richard0525/foundations-machine-learning-ai}{Course GitHub repository}
+\quad | \quad
+\href{https://github.com/richard0525/foundations-machine-learning-ai/tree/main/homework_1}{Homework 1 code and results}}
 \end{center}
 
 \section*{1. Betting and expected utility}
@@ -121,8 +125,9 @@ finite sigmoid logit cannot attain 0 or 1, so in deterministic conditional cases
 the optimum over finite logits is an infimum rather than an attained minimum.
 
 \section*{3. Why a constant SGD step size can be reasonable}
-The condition $\sum_t\rho_t^2<\infty$ concerns asymptotically removing persistent
-gradient noise as $t\to\infty$, alongside other assumptions. A finite dataset and
+The lecture's conditions $\sum_t\rho_t=\infty$ and $\sum_t\rho_t^2<\infty$
+allow continued progress while asymptotically controlling persistent gradient
+noise, alongside regularity assumptions. A finite dataset and
 a finite training budget have a different goal: useful prediction, not arbitrarily
 precise minimization of the empirical objective.
 
@@ -247,12 +252,13 @@ The PyTorch affine model computes $z_i=w^T\widetilde x_i+b$ and
 $p_i=\sigma(z_i)$. I implement the requested mean BCE as
 \[
 \mathcal L_{\rm logit}(w,b)
-=\frac1n\sum_i\big[\operatorname{softplus}(z_i)-y_i z_i\big],
+=\frac1n\sum_i\operatorname{softplus}((1-2y_i)z_i),
 \qquad \operatorname{softplus}(z)=\log(1+e^z).
 \]
-This is algebraically identical to $-y\log p-(1-y)\log(1-p)$.
-PyTorch's stable softplus avoids overflow and cancellation; probabilities do not
-need to be clipped. Gradients are obtained with \code{loss.backward()}.
+For binary labels, this equals both $\operatorname{softplus}(z)-yz$ and
+$-y\log p-(1-y)\log(1-p)$. The signed-margin form avoids subtracting nearly
+equal large numbers for confidently correct predictions. Stable softplus also
+avoids overflow; clipping is unnecessary. Gradients use \code{loss.backward()}.
 
 \subsection*{(b) Probit model with the same BCE}
 For probit, $p_i=\Phi(z_i)$. Since $1-\Phi(z)=\Phi(-z)$, the same BCE is
@@ -321,8 +327,8 @@ For a single example,
 \]
 The Student-t gradient downweights large residuals, while the MSE gradient grows
 linearly. This explains robustness to large errors, but does not guarantee a lower
-MAE on every test set. The Student-t objective is not globally convex in the
-residual for $|r|>\sqrt5$.
+MAE on every test set. The Student-t loss has negative second derivative when
+$|r|>\sqrt5$, so the objective is not globally convex in general.
 
 \subsection*{Training, results, and optimization checks}
 Both custom regressions use zero initial weights, bias initialized to the training
@@ -364,16 +370,53 @@ mark the chosen epochs before refitting on the entire training set.
 vertical scales differ because the losses have different definitions.
 \normalsize
 
-\textbf{Reproduction.} The repository stores code under \code{homework\_1/}.
-Create a Python 3.12 environment, install \code{requirements.txt}, and execute
-\code{python homework\_1/run.py}. This regenerates every empirical table,
-prediction file, and figure. Then run
-\code{python -m unittest discover -s homework\_1} with
-\code{-p 'test\_*.py' -v}
-for eight checks of the custom losses, analytic and finite-difference gradients,
+\newpage
+\section*{Code access and reproduction}
+\textbf{Course repository (clickable):}\\
+\url{https://github.com/richard0525/foundations-machine-learning-ai}
+
+\textbf{Homework 1 directory (clickable):}\\
+\url{https://github.com/richard0525/foundations-machine-learning-ai/tree/main/homework_1}
+
+The course repository organizes assignments as \code{homework\_1/},
+\code{homework\_2/}, and so on as they are completed. This submission contains
+\code{homework\_1/}. Its README documents the methods, inputs, and output files.
+
+\subsection*{Clone and run}
+With Git and Python 3.12 installed, run these commands from a terminal
+(macOS/Linux):
+\begin{quote}\small
+\begin{verbatim}
+git clone https://github.com/richard0525/foundations-machine-learning-ai.git
+cd foundations-machine-learning-ai
+python3.12 -m venv .venv
+.venv/bin/python -m pip install -r homework_1/requirements.txt
+.venv/bin/python homework_1/run.py
+.venv/bin/python -m unittest discover -s homework_1 -p 'test_*.py' -v
+.venv/bin/python homework_1/build_report.py
+\end{verbatim}
+\end{quote}
+On Windows, create the environment with \code{py -3.12 -m venv .venv} and
+replace \code{.venv/bin/python} with \code{.venv\textbackslash Scripts\textbackslash python.exe}.
+No GPU is needed. Dependency installation requires internet access. The ALE CSV
+is bundled and checksum-verified; if missing, it is downloaded automatically.
+The classification data are bundled with scikit-learn. No data-service account,
+API key, or local absolute path is required by the computations.
+
+\subsection*{Expected outputs and verification}
+\code{run.py} regenerates the numerical results and plots in
+\code{homework\_1/results/}. The saved classification accuracies are 98.25\%
+(sklearn logistic) and 97.37\% (both custom classifiers); regression MAEs are
+approximately 0.195393, 0.195373, and 0.194071 meters for OLS, MSE SGD, and
+Student-t SGD. See the earlier tables for interpretation.
+
+The test command checks custom losses, analytic and finite-difference gradients,
 tail stability, data integrity, and recovery of a known linear solution.
-\code{python homework\_1/build\_report.py} refreshes report tables and compiles
-this PDF if \code{pdflatex} is installed.
+There are nine tests. \code{build\_report.py} refreshes the report tables from
+the default results directory and rebuilds this PDF if \code{pdflatex} is installed.
+LaTeX is optional for running the experiments: the completed PDF is included at
+\href{https://github.com/richard0525/foundations-machine-learning-ai/blob/main/homework_1/results/solution.pdf}{\code{homework\_1/results/solution.pdf}}.
+All settings in \code{config.json} are part of the reported experiment.
 
 \textbf{Audit trail.} JSON files record fixed seeds, train/test and validation
 indices, original and standardized coefficients, preprocessing statistics,

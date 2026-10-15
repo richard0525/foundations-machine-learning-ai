@@ -23,8 +23,9 @@ def probit_probability(z):
 
 
 def logistic_loss(z, y):
-    # Exactly BCE(sigmoid(z), y), evaluated in the log domain to avoid clipping.
-    return (torch.nn.functional.softplus(z) - y * z).mean()
+    # Binary labels: BCE = softplus((1-2*y)*z). Avoid subtracting two
+    # nearly equal large values when y=1 and z is large and positive.
+    return torch.nn.functional.softplus((1.0 - 2.0 * y) * z).mean()
 
 
 def probit_loss(z, y):

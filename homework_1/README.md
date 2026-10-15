@@ -36,6 +36,8 @@ set. Class predictions threshold the probability of label 1 at 0.5.
 The sklearn logistic baseline retains its default L2 regularization (`C=1`); the
 custom losses are the unpenalized BCE requested in the assignment. Their differing
 regularization and early stopping are explicitly acknowledged in the report.
+For binary labels, logistic BCE uses `softplus((1-2*y)*z)`, avoiding cancellation
+from subtracting nearly equal large terms for confident correct predictions.
 Log-domain formulas avoid sigmoid/CDF clipping without changing the mathematical
 BCE. All four custom models use `torch.optim.SGD` with zero momentum and no weight
 decay. The rate in epoch e (starting at zero) is eta0/(1+e/decay_epochs).

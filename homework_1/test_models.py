@@ -30,6 +30,16 @@ class LossTests(unittest.TestCase):
         reference = -(y*stats.norm.logcdf(z)+(1-y)*stats.norm.logcdf(-z)).mean()
         self.assertAlmostEqual(float(probit_loss(self.z, self.y).detach()), reference, places=13)
 
+    def test_logistic_correct_tail_retains_small_loss_and_gradient(self):
+        z = torch.tensor([-40., 40.], dtype=torch.float64, requires_grad=True)
+        y = torch.tensor([0., 1.], dtype=torch.float64)
+        value = logistic_loss(z, y)
+        grad, = torch.autograd.grad(value, z)
+        reference_loss = np.logaddexp(0.0, -40.0)
+        reference_grad = np.array([1.0, -1.0]) / (2.0 * (1.0 + np.exp(40.0)))
+        np.testing.assert_allclose(float(value.detach()), reference_loss, rtol=1e-14, atol=0)
+        np.testing.assert_allclose(grad.numpy(), reference_grad, rtol=1e-14, atol=0)
+
     def test_extreme_classification_logits_have_finite_losses_and_gradients(self):
         for loss in (logistic_loss, probit_loss):
             z = torch.tensor([-100., 100.], dtype=torch.float64, requires_grad=True)
