@@ -99,11 +99,11 @@
   },
   "source_sha256": {
     "run.py": "0935d8430090590ff5e12448da466f34330ec1d535bd77c0c023188965ffb9ab",
-    "common.py": "bc8d4a8cf3284efe4e635ab2d267aa268e1fa3029353a5f9bbee7cee2ec3904b",
+    "common.py": "3b4088c6fb9a7837cd18a329a1da3cf88dd28cdd5769f8565f5022cd9aaeb4fa",
     "models.py": "9fe54cc77a9be66253a1eeb4344e32f21b0776881e6a17bc3ab86a592fc0f791",
     "encoding.py": "89af7b33bc808fa667ed3147835604f6d17eed5c4214cef29bc7ef9e1ddec04e",
     "dataloader.py": "e780be025b4cc7e45dacf81d2b8a11993a8e926b238437c2638e2a7ed50f57dc",
-    "q1_taxi.py": "b0d8923230c85e89960916b43ec3ec56a7a7078f09a516a95c7849bf34b12451",
+    "q1_taxi.py": "4a22f26ac8a4b0cde9daa101b0b702fc4cf2fdc6200d7ec87f62fb90e62ad553",
     "q2_retail.py": "a15068c8e908aa37077045a69faf82cd2abae3cc3c4540ff21caf8857fb2af13",
     "q3_features.py": "8581b923caefdae6b3b18dacade5f1120961aa08a793ddefffa98e0c934d0fce",
     "config.json": "3ba5f3cff334e3b23c9bddddbb67e51c144e6ae9991e1f0a14434b9993aba483"

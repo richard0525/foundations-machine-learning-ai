@@ -1,15 +1,16 @@
 """Independent checks of the likelihood, ridge solver, and leakage boundaries."""
 from pathlib import Path
 import unittest
+import math
 import numpy as np
 import pandas as pd
 from scipy import stats
 from sklearn.linear_model import Ridge
 import torch
-from common import ROOT, setup, split_indices, verify_data
+from common import ROOT, setup, split_indices, verify_data, exact_row_groups
 from encoding import CrossFitTargetEncoder, CategoryVocabulary
 from models import RandomKitchenSinks, GaussianMLP, gaussian_nll
-from q1_taxi import gaussian_metrics
+from q1_taxi import gaussian_metrics, gaussian_tail_probability
 from dataloader import HW2Dataset
 
 
@@ -50,6 +51,14 @@ class HomeworkTests(unittest.TestCase):
         self.assertAlmostEqual(result['binary_log_loss'],np.log(2))
         self.assertAlmostEqual(result['accuracy'],1/3)
 
+    def test_gaussian_tail_probability_preserves_tiny_positive_values(self):
+        z=np.array([10.,12.,20.])
+        tail=gaussian_tail_probability(45.-z,np.ones_like(z))
+        expected=np.array([.5*math.erfc(float(value)/math.sqrt(2)) for value in z])
+        self.assertTrue((tail>0).all())
+        np.testing.assert_allclose(tail,expected,rtol=1e-12,atol=0)
+        self.assertEqual(float(gaussian_tail_probability(45.,1.)),.5)
+
     def test_rks_matches_independent_ridge_primal_and_dual(self):
         rng=np.random.default_rng(13);x=rng.normal(size=(25,2));y=rng.normal(size=25);xe=rng.normal(size=(11,2))
         for D in [12,60]:
@@ -87,6 +96,21 @@ class HomeworkTests(unittest.TestCase):
         train,val,test=split_indices(397924,2026)
         self.assertEqual(len(val),len(test))
         np.testing.assert_array_equal(np.sort(np.r_[train,val,test]),np.arange(397924))
+
+    def test_exact_duplicates_never_cross_splits_even_with_distinct_indices(self):
+        base=pd.DataFrame({'x':np.arange(100.),'y':np.arange(100.)**2})
+        frame=pd.concat([base,base],ignore_index=True).sample(frac=1,random_state=19)
+        groups=exact_row_groups(frame)
+        renamed=frame.set_axis(np.arange(len(frame))+10000)
+        np.testing.assert_array_equal(groups,exact_row_groups(renamed))
+        self.assertEqual(len(np.unique(groups)),100)
+        splits=split_indices(len(frame),2026,groups=groups)
+        np.testing.assert_array_equal(np.sort(np.concatenate(splits)),np.arange(len(frame)))
+        self.assertEqual([len(ix) for ix in splits],[140,30,30])
+        for a,b in [(0,1),(0,2),(1,2)]:
+            self.assertEqual(np.intersect1d(groups[splits[a]],groups[splits[b]]).size,0)
+        repeated=split_indices(len(frame),2026,groups=groups)
+        for first,second in zip(splits,repeated):np.testing.assert_array_equal(first,second)
 
     def test_provided_data_integrity_and_unlabeled_test_contract(self):
         verify_data(ROOT/'data')

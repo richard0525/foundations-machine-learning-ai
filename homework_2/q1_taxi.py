@@ -6,7 +6,7 @@ import torch
 from scipy import special, stats
 from sklearn.ensemble import HistGradientBoostingRegressor
 from sklearn.linear_model import LinearRegression
-from common import (setup, dump, savefig, split_indices, save_split, tensor,
+from common import (setup, dump, savefig, split_indices, save_split, exact_row_groups, tensor,
                     fit_network, batched_predict, save_csv_gz, plt)
 from models import GaussianMLP, gaussian_nll
 
@@ -19,6 +19,11 @@ def probability_metrics(y, probability, log_p=None, log_one_minus_p=None):
     return {"brier":float(np.mean((p-event)**2)),
             "binary_log_loss":float(-np.mean(np.where(event, log_p, log_one_minus_p))),
             "accuracy":float(np.mean((p >= .5) == event))}
+
+
+def gaussian_tail_probability(mu, sigma, threshold=45.):
+    """Normal P(Y >= threshold), avoiding cancellation for tiny positive tails."""
+    return special.ndtr((np.asarray(mu, float)-threshold)/np.asarray(sigma, float))
 
 
 def gaussian_metrics(y, mu, sigma):
@@ -43,8 +48,15 @@ def run(data, out, config):
     features = [s for s in frame.columns if s != "trip_duration"]
     assert len(features)==7 and np.isfinite(frame.to_numpy()).all()
     x, y = frame[features].to_numpy(np.float32), frame.trip_duration.to_numpy(np.float64)
-    train, val, test = split_indices(len(y), seed, c["train_fraction"], c["validation_fraction"])
+    groups = exact_row_groups(frame)
+    train, val, test = split_indices(len(y), seed, c["train_fraction"], c["validation_fraction"], groups=groups)
     save_split(out, "q1", train, val, test)
+    np.savez_compressed(out/"q1_exact_row_groups.npz", group_ids=groups)
+    group_sizes = np.bincount(groups)
+    group_counts = {name:int(np.unique(groups[ids]).size) for name,ids in [("train",train),("validation",val),("test",test)]}
+    group_overlap = {name:int(np.intersect1d(groups[left],groups[right]).size)
+                     for name,left,right in [("train_validation",train,val),("train_test",train,test),("validation_test",val,test)]}
+    assert all(count == 0 for count in group_overlap.values())
     target_mean, target_scale = float(y[train].mean()), float(y[train].std())
     print(f"Q1 taxi: {len(train)} train, {len(val)} validation, {len(test)} test", flush=True)
     # The seven supplied features are already standardized. Only target scaling
@@ -94,8 +106,7 @@ def run(data, out, config):
 
     mu,sigma=final_prediction
     event=y[test]<45
-    probability=special.ndtr((45-mu)/sigma)
-    late_probability=1-probability
+    late_probability=gaussian_tail_probability(mu,sigma)
     bins=pd.qcut(late_probability,10,duplicates="drop")
     reliability=(pd.DataFrame({"bin":bins,"predicted":late_probability,"observed":~event})
                  .groupby("bin",observed=True).agg(n=("observed","size"),predicted=("predicted","mean"),observed=("observed","mean")).reset_index())
@@ -125,6 +136,10 @@ def run(data, out, config):
     savefig(fig,out,"q1_distribution_and_calibration")
     summary={"n":len(y),"features":features,"split_sizes":{"train":len(train),"validation":len(val),"test":len(test)},
              "missing_values":int(frame.isna().sum().sum()),"exact_duplicate_rows":int(frame.duplicated().sum()),
+             "split_strategy":"GroupShuffleSplit on exact full-row identity, ignoring the Parquet index",
+             "exact_row_groups":{"unique":int(len(group_sizes)),"duplicate_groups":int((group_sizes>1).sum()),
+                 "rows_in_duplicate_groups":int(group_sizes[group_sizes>1].sum()),
+                 "group_counts_by_split":group_counts,"cross_split_group_overlap":group_overlap},
              "target_mean_train":target_mean,"target_sd_train":target_scale,"selected_epoch":epoch,
              "epochs_run":int(history.epoch.iloc[-1]),"training_event_prevalence":prevalence,
              "test_under_45_count":int(event.sum()),"test_at_least_45_count":int((~event).sum()),

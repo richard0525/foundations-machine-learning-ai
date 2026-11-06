@@ -76,6 +76,15 @@ def main():
             'MLPWidth':q3['best_mlp']['hidden_width'],'MLPEpoch':q3['best_mlp']['selected_epoch'],
             'MLPImprovement':f"{100*(1-q3['best_mlp']['validation_mse']/q3['best_rks']['validation_mse']):.2f}",
             'RuntimeMinutes':f"{sum(q['runtime_seconds'] for q in [q1,q2,q3])/60:.1f}"}
+    mlp_test=next(row for row in q1['metrics'] if row['split']=='test' and row['model']=='Gaussian MLP')
+    macros.update({
+        'TaxiTargetMean':f"{q1['target_mean_train']:.6f}",
+        'TaxiTargetSD':f"{q1['target_sd_train']:.6f}",
+        'TaxiCoverage':f"{100*mlp_test['coverage_90']:.2f}",
+        'TaxiUnderCount':f"{q1['test_under_45_count']:,}",
+        'TaxiOverCount':f"{q1['test_at_least_45_count']:,}",
+        'TaxiAlwaysAccuracy':f"{100*q1['test_event_prevalence']:.4f}",
+        'TaxiFrequency':f"{q1['training_event_prevalence']:.9f}"})
     for label,q in [('Taxi',q1),('Retail',q2)]:
         for split,value in q['split_sizes'].items():
             macros[label+split.title()]=f'{value:,}'

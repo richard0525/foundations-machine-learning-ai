@@ -7,7 +7,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 import torch
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import GroupShuffleSplit, train_test_split
 
 ROOT = Path(__file__).resolve().parent
 os.environ.setdefault("MPLCONFIGDIR", str(ROOT / ".cache" / "matplotlib"))
@@ -42,10 +42,33 @@ def verify_data(data_dir):
     return manifest
 
 
-def split_indices(n, seed, train_fraction=.7, validation_fraction=.15):
-    train, holdout = train_test_split(np.arange(n), train_size=train_fraction, random_state=seed)
+def exact_row_groups(frame):
+    """Identify exact full-row duplicates without treating the index as data."""
+    return frame.groupby(list(frame.columns), sort=False, dropna=False).ngroup().to_numpy(np.int64)
+
+
+def split_indices(n, seed, train_fraction=.7, validation_fraction=.15, groups=None):
+    """Split rows, optionally keeping every member of a group in one split.
+
+    GroupShuffleSplit proportions refer to groups, so grouped row proportions
+    are approximate. The ungrouped branch preserves the retail split exactly.
+    """
+    indices = np.arange(n)
     ratio = round(validation_fraction/(1-train_fraction), 12)
-    val, test = train_test_split(holdout, train_size=ratio, random_state=seed+1)
+    if groups is None:
+        train, holdout = train_test_split(indices, train_size=train_fraction, random_state=seed)
+        val, test = train_test_split(holdout, train_size=ratio, random_state=seed+1)
+    else:
+        groups = np.asarray(groups)
+        if groups.ndim != 1 or len(groups) != n:
+            raise ValueError("groups must be one-dimensional with one ID per row")
+        train, holdout = next(GroupShuffleSplit(n_splits=1, train_size=train_fraction,
+            random_state=seed).split(indices, groups=groups))
+        val_positions, test_positions = next(GroupShuffleSplit(n_splits=1, train_size=ratio,
+            random_state=seed+1).split(holdout, groups=groups[holdout]))
+        val, test = holdout[val_positions], holdout[test_positions]
+        for left, right in [(train, val), (train, test), (val, test)]:
+            assert np.intersect1d(groups[left], groups[right]).size == 0
     assert set(train).isdisjoint(val) and set(train).isdisjoint(test) and set(val).isdisjoint(test)
     assert len(train)+len(val)+len(test) == n
     return train, val, test

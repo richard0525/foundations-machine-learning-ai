@@ -48,7 +48,8 @@ reported. `q3_test_audit.csv` includes coordinates and row numbers for auditing.
 
 ## Methods and leakage controls
 
-**Q1.** Approximately 70/15/15 random train/validation/test split. The provided
+**Q1.** Approximately 70/15/15 random split of exact-record groups, keeping
+identical taxi records in the same train/validation/test partition. The provided
 seven features are already standardized; the duration target is centered/scaled
 using training statistics only. A 7–64–64–2 ReLU MLP returns a mean and
 `softplus(raw_scale) + 0.001` standard deviation on this scaled target. Gaussian
@@ -103,6 +104,11 @@ score, not an unbiased test estimate.
 - `results/`: metrics, prediction audits, split indices, encoding maps, trained
   weights, sweep/learning curves, figures, and compiled report.
 - `results/metadata_all.json`: package versions, input checksums, and experiment source hashes.
+
+The assignment explicitly requests two prediction CSVs in Q3(d); the repository
+links support retrieval but do not replace any required submission uploads.
+The ZIP, model weights, data, and verification files need not be uploaded
+separately under the course GitHub code guidelines.
 
 The original assignment PDF, screenshot, and incomplete starter model skeleton
 are retained in the user's local input folder, not republished as submitted code.

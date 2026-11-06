@@ -30,5 +30,5 @@
   "refit_data": "training only; fixed selected epoch for MLP",
   "test_predictions": "200 header-free rows per model, in supplied test.csv order",
   "test_labels_available": false,
-  "runtime_seconds": 41.7698091249913
+  "runtime_seconds": 58.23161062481813
 }
