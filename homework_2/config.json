@@ -1,0 +1,7 @@
+{
+  "seed": 2026,
+  "threads": 1,
+  "taxi": {"train_fraction": 0.7, "validation_fraction": 0.15, "hidden": [64, 64], "epochs": 120, "patience": 15, "batch_size": 2048, "learning_rate": 0.001, "weight_decay": 0.00001, "sigma_floor_standardized": 0.001},
+  "retail": {"train_fraction": 0.7, "validation_fraction": 0.15, "encoding_folds": 5, "encoding_smoothing": 20.0, "embedding_dim": 16, "hidden": [64, 32], "dropout": 0.05, "epochs": 100, "patience": 12, "batch_size": 2048, "learning_rate": 0.001, "weight_decay": 0.0001},
+  "toy": {"rks_D": [16, 32, 64, 128, 256, 512, 1024], "rks_sigma": 1.0, "rks_lambda": 0.001, "mlp_widths": [8, 16, 32, 64, 128, 256], "activation": "tanh", "epochs": 3000, "patience": 250, "batch_size": 128, "learning_rate": 0.003, "weight_decay": 0.00001, "checkpoint_every": 10}
+}

@@ -1,0 +1,22 @@
+{
+  "taxi_trips.parquet": {
+    "sha256": "6a713446584efe41bb161f77f068331b964a04c84abd3b69164bc2bdb585e3dc",
+    "bytes": 9619046
+  },
+  "retail.csv": {
+    "sha256": "5da6724e4ee820f19e1bdb5076fd24355a10f8e75159062824c85f17ea052597",
+    "bytes": 6551856
+  },
+  "train.csv": {
+    "sha256": "becc881f01b6c34450b95036c115f92682fed9fb5e1e48b81bb681f8cf672e8e",
+    "bytes": 45737
+  },
+  "val.csv": {
+    "sha256": "2d96164fa2019e8333e93f7a9ba96bfb606ec60b2fa4c485d0b45501753fbac6",
+    "bytes": 15260
+  },
+  "test.csv": {
+    "sha256": "3b0f5fe8ae346f5dff4f805de7893ce190f331a2c8871e0f857cf66dcab00857",
+    "bytes": 10195
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "part": "all",
+  "config": {
+    "seed": 2026,
+    "threads": 1,
+    "taxi": {
+      "train_fraction": 0.7,
+      "validation_fraction": 0.15,
+      "hidden": [
+        64,
+        64
+      ],
+      "epochs": 120,
+      "patience": 15,
+      "batch_size": 2048,
+      "learning_rate": 0.001,
+      "weight_decay": 1e-05,
+      "sigma_floor_standardized": 0.001
+    },
+    "retail": {
+      "train_fraction": 0.7,
+      "validation_fraction": 0.15,
+      "encoding_folds": 5,
+      "encoding_smoothing": 20.0,
+      "embedding_dim": 16,
+      "hidden": [
+        64,
+        32
+      ],
+      "dropout": 0.05,
+      "epochs": 100,
+      "patience": 12,
+      "batch_size": 2048,
+      "learning_rate": 0.001,
+      "weight_decay": 0.0001
+    },
+    "toy": {
+      "rks_D": [
+        16,
+        32,
+        64,
+        128,
+        256,
+        512,
+        1024
+      ],
+      "rks_sigma": 1.0,
+      "rks_lambda": 0.001,
+      "mlp_widths": [
+        8,
+        16,
+        32,
+        64,
+        128,
+        256
+      ],
+      "activation": "tanh",
+      "epochs": 3000,
+      "patience": 250,
+      "batch_size": 128,
+      "learning_rate": 0.003,
+      "weight_decay": 1e-05,
+      "checkpoint_every": 10
+    }
+  },
+  "python": "3.12.14",
+  "platform": "macOS-14.4-arm64-arm-64bit",
+  "device": "CPU",
+  "versions": {
+    "numpy": "2.5.4",
+    "pandas": "3.0.6",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.1",
+    "torch": "2.14.1",
+    "matplotlib": "3.11.2",
+    "pyarrow": "26.0.1"
+  },
+  "data": {
+    "taxi_trips.parquet": {
+      "sha256": "6a713446584efe41bb161f77f068331b964a04c84abd3b69164bc2bdb585e3dc",
+      "bytes": 9619046
+    },
+    "retail.csv": {
+      "sha256": "5da6724e4ee820f19e1bdb5076fd24355a10f8e75159062824c85f17ea052597",
+      "bytes": 6551856
+    },
+    "train.csv": {
+      "sha256": "becc881f01b6c34450b95036c115f92682fed9fb5e1e48b81bb681f8cf672e8e",
+      "bytes": 45737
+    },
+    "val.csv": {
+      "sha256": "2d96164fa2019e8333e93f7a9ba96bfb606ec60b2fa4c485d0b45501753fbac6",
+      "bytes": 15260
+    },
+    "test.csv": {
+      "sha256": "3b0f5fe8ae346f5dff4f805de7893ce190f331a2c8871e0f857cf66dcab00857",
+      "bytes": 10195
+    }
+  },
+  "source_sha256": {
+    "run.py": "0935d8430090590ff5e12448da466f34330ec1d535bd77c0c023188965ffb9ab",
+    "common.py": "bc8d4a8cf3284efe4e635ab2d267aa268e1fa3029353a5f9bbee7cee2ec3904b",
+    "models.py": "9fe54cc77a9be66253a1eeb4344e32f21b0776881e6a17bc3ab86a592fc0f791",
+    "encoding.py": "89af7b33bc808fa667ed3147835604f6d17eed5c4214cef29bc7ef9e1ddec04e",
+    "dataloader.py": "e780be025b4cc7e45dacf81d2b8a11993a8e926b238437c2638e2a7ed50f57dc",
+    "q1_taxi.py": "b0d8923230c85e89960916b43ec3ec56a7a7078f09a516a95c7849bf34b12451",
+    "q2_retail.py": "a15068c8e908aa37077045a69faf82cd2abae3cc3c4540ff21caf8857fb2af13",
+    "q3_features.py": "8581b923caefdae6b3b18dacade5f1120961aa08a793ddefffa98e0c934d0fce",
+    "config.json": "3ba5f3cff334e3b23c9bddddbb67e51c144e6ae9991e1f0a14434b9993aba483"
+  }
+}

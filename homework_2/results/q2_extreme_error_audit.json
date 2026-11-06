@@ -1,0 +1,20 @@
+{
+  "target": {
+    "row_id": 308097,
+    "actual": 2400,
+    "predicted": 97.859150749,
+    "fraction_total_squared_error": 0.07836796126554466
+  },
+  "embedding": {
+    "row_id": 308097,
+    "actual": 2400,
+    "predicted": 223.910132763,
+    "fraction_total_squared_error": 0.09428951623629588
+  },
+  "combined": {
+    "row_id": 86384,
+    "actual": 1000,
+    "predicted": 6248.52115257,
+    "fraction_total_squared_error": 0.23046329468340174
+  }
+}

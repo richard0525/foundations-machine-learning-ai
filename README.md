@@ -3,7 +3,8 @@
 Reproducible course homework code. Each assignment lives in its own directory.
 
 - [homework_1/](homework_1/): theoretical solutions, ALE residual diagnostics, and custom PyTorch models.
-- Future assignments will use `homework_2/`, `homework_3/`, and so on when completed.
+- [homework_2/](homework_2/): taxi uncertainty, retail categorical encodings, and random features versus an MLP.
+- Future assignments will use `homework_3/`, `homework_4/`, and so on when completed.
 
 Course repository: https://github.com/richard0525/foundations-machine-learning-ai
 
@@ -42,3 +43,22 @@ See `homework_1/README.md` for methods and output details.
 
 The test suite contains nine tests, including independent loss/gradient checks
 and a regression check for cancellation in correctly classified extreme logits.
+
+## Run Homework 2
+
+See [Homework 2 instructions](homework_2/README.md) and the
+[solution PDF](homework_2/results/solution.pdf). From the repository root,
+using a Python 3.12 virtual environment:
+
+```bash
+.venv/bin/python -m pip install -r homework_2/requirements-lock.txt
+.venv/bin/python homework_2/run.py
+.venv/bin/python -m unittest discover -s homework_2 -v
+.venv/bin/python homework_2/build_report.py
+```
+
+All five HW2 datasets are included with checksums. No account, API key, external
+data download, or GPU is needed. The required unlabeled test predictions are
+[the RKS CSV](homework_2/results/rks_test_predictions.csv) and
+[the MLP CSV](homework_2/results/mlp_test_predictions.csv), each with 200 rows
+and no header. The experiments, saved results, and report live under `homework_2/`.

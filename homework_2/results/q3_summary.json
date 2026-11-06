@@ -1,0 +1,34 @@
+{
+  "n_train": 600,
+  "n_validation": 200,
+  "n_test": 200,
+  "best_rks": {
+    "D": 128,
+    "h": 64,
+    "train_mse": 0.031030436747685495,
+    "validation_mse": 0.03783134102398333
+  },
+  "best_mlp": {
+    "hidden_width": 16,
+    "selected_epoch": 2340,
+    "epochs_run": 2590,
+    "train_mse": 0.033166591774618406,
+    "validation_mse": 0.03572799778119243
+  },
+  "comparison": [
+    {
+      "model": "RKS",
+      "train_mse": 0.031030436747685495,
+      "validation_mse": 0.03783134102398333
+    },
+    {
+      "model": "MLP",
+      "train_mse": 0.033166591774618406,
+      "validation_mse": 0.03572799778119243
+    }
+  ],
+  "refit_data": "training only; fixed selected epoch for MLP",
+  "test_predictions": "200 header-free rows per model, in supplied test.csv order",
+  "test_labels_available": false,
+  "runtime_seconds": 41.7698091249913
+}
