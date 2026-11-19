@@ -37,6 +37,9 @@ dataset. It verifies input checksums before fitting. To run just one problem:
 .venv-hw3/bin/python homework_3/run.py --part q3
 ```
 
+`verify.py` checks both Q2 and Q3. For a new output directory, run the default
+full experiment or run both parts into that directory before verification.
+
 To preserve committed results when reproducing them, add
 `--output-dir /path/to/new-results`, and pass the same directory to
 `verify.py --results-dir /path/to/new-results`.
