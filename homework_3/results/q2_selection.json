@@ -1,0 +1,24 @@
+{
+  "random_forest": {
+    "candidate_id": 26,
+    "parameters": {
+      "max_depth": null,
+      "max_features": 0.33,
+      "max_samples": 1.0,
+      "min_samples_leaf": 1,
+      "n_estimators": 200
+    },
+    "validation_mse": 0.30509341836734694,
+    "configurations": 540
+  },
+  "knn": {
+    "candidate_id": 21,
+    "parameters": {
+      "n_neighbors": 6,
+      "p": 1,
+      "weights": "distance"
+    },
+    "validation_mse": 0.33591668316286144,
+    "configurations": 500
+  }
+}

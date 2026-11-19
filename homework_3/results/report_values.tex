@@ -1,0 +1,22 @@
+\newcommand{\RFChoice}{RF selects 200 trees, unrestricted depth, minimum leaf size 1, feature fraction 0.33, and bootstrap fraction 1.0.}
+\newcommand{\KNNChoice}{6 neighbors, inverse-distance weights, and Manhattan distance}
+\newcommand{\WineRows}{Random forest & 0.0506 & 0.3051 & 0.4301 & +0.1250 \\
+K-nearest neighbors & 0.0000 & 0.3359 & 0.4778 & +0.1419 \\
+Training-mean baseline & 0.7839 & 0.7417 & 0.8067 & +0.0650 \\}
+\newcommand{\WineInterpretation}{RF's test MSE is 0.1250 higher than its selected validation MSE; KNN's test MSE is 0.1419 higher than its selected validation MSE. Validation and test estimate the risk of the same fitted predictor, but on different samples. Validation also influenced which predictor was selected. Their difference reflects both selection and sampling variability; its sign on one split is not a proof or disproof of the expected optimism in part (b). Both selected models improve on the constant baseline on the test set.}
+\newcommand{\WineDuplicates}{937}
+\newcommand{\WineValRepeats}{114}
+\newcommand{\WineTestRepeats}{253}
+\newcommand{\BoostRows}{dset0 & 1 & 42.57 & 42.67 & 0.65915 & 0.6785 \\
+dset0 & 10 & 15.14 & 27.33 & 0.50015 & 0.5770 \\
+dset0 & 100 & 0.29 & 15.33 & 0.12270 & 0.4144 \\
+dset0 & 300 & 0.00 & 13.33 & 0.01861 & 0.4969 \\
+dset0 & 1,000 & 0.00 & 17.33 & 0.00007 & 1.0119 \\
+\midrule
+dset1 & 1 & 24.00 & 24.67 & 0.63682 & 0.6459 \\
+dset1 & 10 & 12.57 & 18.67 & 0.40185 & 0.4825 \\
+dset1 & 100 & 1.14 & 14.67 & 0.11775 & 0.3210 \\
+dset1 & 300 & 0.00 & 15.33 & 0.02169 & 0.3944 \\
+dset1 & 1,000 & 0.00 & 16.67 & 0.00012 & 0.7376 \\}
+\newcommand{\SensitivityRows}{dset0 & $17.93\pm2.85$ & $17.63\pm2.90$ & $17.90\pm2.80$ \\
+dset1 & $18.63\pm2.98$ & $19.53\pm2.86$ & $19.93\pm2.84$ \\}

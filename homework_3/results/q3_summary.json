@@ -1,0 +1,538 @@
+{
+  "primary_split_seed": 2026,
+  "model_seed": 2026,
+  "test_fraction": 0.3,
+  "split_method": "stratified random 70/30 train/test",
+  "primary_counts": [
+    1,
+    10,
+    100,
+    300,
+    1000
+  ],
+  "model_parameters": {
+    "loss": "log_loss",
+    "learning_rate": 0.1,
+    "max_depth": 3,
+    "subsample": 1.0,
+    "min_samples_leaf": 1,
+    "min_samples_split": 2,
+    "max_features": null,
+    "n_iter_no_change": null,
+    "ccp_alpha": 0.0
+  },
+  "robustness_split_seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
+  ],
+  "robustness_interpretation": "Prespecified splits; SD describes split sensitivity, not a confidence interval; observations overlap across splits.",
+  "selection_policy": "All hyperparameters and tree budgets fixed before testing; no test-guided model selection.",
+  "datasets": {
+    "dset0": {
+      "source_file": "dset0-1.csv",
+      "sha256": "4c8fd3472e93f82f262407ccfb245db19300668376f5ec4040d7699cab9d3c0f",
+      "diagnostics": {
+        "rows": 500,
+        "features": 5,
+        "class_counts": {
+          "0": 287,
+          "1": 213
+        },
+        "duplicate_feature_rows_beyond_first": 0,
+        "conflicting_label_feature_groups": 0,
+        "pearson_label_feature_correlations": [
+          0.03200056707655195,
+          0.20139713123935196,
+          -0.11129113696215781,
+          0.13328854872656334,
+          -0.1621712512462497
+        ],
+        "feature1_equal_count_bin_label_rates": [
+          {
+            "n": 50,
+            "feature1_mean": -1.6788399999999999,
+            "positive_fraction": 0.36
+          },
+          {
+            "n": 50,
+            "feature1_mean": -0.92672,
+            "positive_fraction": 0.68
+          },
+          {
+            "n": 50,
+            "feature1_mean": -0.5920400000000001,
+            "positive_fraction": 0.46
+          },
+          {
+            "n": 50,
+            "feature1_mean": -0.31052,
+            "positive_fraction": 0.28
+          },
+          {
+            "n": 50,
+            "feature1_mean": -0.06202,
+            "positive_fraction": 0.26
+          },
+          {
+            "n": 50,
+            "feature1_mean": 0.17671999999999996,
+            "positive_fraction": 0.38
+          },
+          {
+            "n": 50,
+            "feature1_mean": 0.39286,
+            "positive_fraction": 0.2
+          },
+          {
+            "n": 50,
+            "feature1_mean": 0.63296,
+            "positive_fraction": 0.48
+          },
+          {
+            "n": 50,
+            "feature1_mean": 0.9994200000000001,
+            "positive_fraction": 0.66
+          },
+          {
+            "n": 50,
+            "feature1_mean": 1.6781200000000005,
+            "positive_fraction": 0.5
+          }
+        ],
+        "nearest_neighbor_label_agreement": 0.78,
+        "random_pair_agreement_from_class_frequencies": 0.5109520000000001,
+        "linear_separability_lp_status": 2,
+        "linear_separability_lp_message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is Infeasible)",
+        "strictly_linearly_separable_observed_sample": false
+      },
+      "train_rows": 350,
+      "test_rows": 150,
+      "train_positive": 149,
+      "test_positive": 64,
+      "baseline_train_positive_fraction": 0.4257142857142857,
+      "baseline_test_classification_error": 0.4266666666666667,
+      "independent_fit_max_abs_score_difference": {
+        "1": {
+          "train": 0.0,
+          "test": 0.0
+        },
+        "10": {
+          "train": 0.0,
+          "test": 0.0
+        },
+        "100": {
+          "train": 0.0,
+          "test": 0.0
+        },
+        "300": {
+          "train": 0.0,
+          "test": 0.0
+        },
+        "1000": {
+          "train": 0.0,
+          "test": 0.0
+        }
+      },
+      "feature_importances_at_1000": [
+        0.41563482932505985,
+        0.15953720719597314,
+        0.2314658779077832,
+        0.10722012164821317,
+        0.08614196392297054
+      ]
+    },
+    "dset1": {
+      "source_file": "dset1-1.csv",
+      "sha256": "6e6fda5c47a636701029a6d9b7d9c44233ce609d50de1ce34105b90c3650cb1a",
+      "diagnostics": {
+        "rows": 500,
+        "features": 5,
+        "class_counts": {
+          "0": 273,
+          "1": 227
+        },
+        "duplicate_feature_rows_beyond_first": 0,
+        "conflicting_label_feature_groups": 0,
+        "pearson_label_feature_correlations": [
+          -0.5886786166155352,
+          -0.29167840830845265,
+          -0.1110037587620271,
+          -0.025982683429299706,
+          0.2016899714022591
+        ],
+        "feature1_equal_count_bin_label_rates": [
+          {
+            "n": 50,
+            "feature1_mean": -1.88618,
+            "positive_fraction": 0.94
+          },
+          {
+            "n": 50,
+            "feature1_mean": -1.0805,
+            "positive_fraction": 0.84
+          },
+          {
+            "n": 50,
+            "feature1_mean": -0.71614,
+            "positive_fraction": 0.7
+          },
+          {
+            "n": 50,
+            "feature1_mean": -0.4529999999999999,
+            "positive_fraction": 0.56
+          },
+          {
+            "n": 50,
+            "feature1_mean": -0.15228,
+            "positive_fraction": 0.54
+          },
+          {
+            "n": 50,
+            "feature1_mean": 0.08088000000000001,
+            "positive_fraction": 0.4
+          },
+          {
+            "n": 50,
+            "feature1_mean": 0.33183999999999997,
+            "positive_fraction": 0.28
+          },
+          {
+            "n": 50,
+            "feature1_mean": 0.6660799999999999,
+            "positive_fraction": 0.12
+          },
+          {
+            "n": 50,
+            "feature1_mean": 1.07232,
+            "positive_fraction": 0.16
+          },
+          {
+            "n": 50,
+            "feature1_mean": 1.7726199999999996,
+            "positive_fraction": 0.0
+          }
+        ],
+        "nearest_neighbor_label_agreement": 0.8,
+        "random_pair_agreement_from_class_frequencies": 0.504232,
+        "linear_separability_lp_status": 2,
+        "linear_separability_lp_message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is Infeasible)",
+        "strictly_linearly_separable_observed_sample": false
+      },
+      "train_rows": 350,
+      "test_rows": 150,
+      "train_positive": 159,
+      "test_positive": 68,
+      "baseline_train_positive_fraction": 0.4542857142857143,
+      "baseline_test_classification_error": 0.4533333333333333,
+      "independent_fit_max_abs_score_difference": {
+        "1": {
+          "train": 0.0,
+          "test": 0.0
+        },
+        "10": {
+          "train": 0.0,
+          "test": 0.0
+        },
+        "100": {
+          "train": 0.0,
+          "test": 0.0
+        },
+        "300": {
+          "train": 0.0,
+          "test": 0.0
+        },
+        "1000": {
+          "train": 0.0,
+          "test": 0.0
+        }
+      },
+      "feature_importances_at_1000": [
+        0.5165012528829379,
+        0.24556211562798158,
+        0.06198494809115115,
+        0.07894922847937146,
+        0.0970024549185579
+      ]
+    }
+  },
+  "primary_metrics": [
+    {
+      "dataset": "dset0",
+      "trees": 1,
+      "train_n": 350,
+      "train_wrong": 149,
+      "train_error": 0.4257142857142857,
+      "train_log_loss": 0.6591549463958891,
+      "test_n": 150,
+      "test_wrong": 64,
+      "test_error": 0.4266666666666667,
+      "test_log_loss": 0.6785152038543786
+    },
+    {
+      "dataset": "dset0",
+      "trees": 10,
+      "train_n": 350,
+      "train_wrong": 53,
+      "train_error": 0.15142857142857144,
+      "train_log_loss": 0.5001465342232508,
+      "test_n": 150,
+      "test_wrong": 41,
+      "test_error": 0.2733333333333333,
+      "test_log_loss": 0.5770421647769634
+    },
+    {
+      "dataset": "dset0",
+      "trees": 100,
+      "train_n": 350,
+      "train_wrong": 1,
+      "train_error": 0.002857142857142857,
+      "train_log_loss": 0.12270495439427857,
+      "test_n": 150,
+      "test_wrong": 23,
+      "test_error": 0.15333333333333332,
+      "test_log_loss": 0.41442254517005234
+    },
+    {
+      "dataset": "dset0",
+      "trees": 300,
+      "train_n": 350,
+      "train_wrong": 0,
+      "train_error": 0.0,
+      "train_log_loss": 0.01861070979376429,
+      "test_n": 150,
+      "test_wrong": 20,
+      "test_error": 0.13333333333333333,
+      "test_log_loss": 0.49693827012000225
+    },
+    {
+      "dataset": "dset0",
+      "trees": 1000,
+      "train_n": 350,
+      "train_wrong": 0,
+      "train_error": 0.0,
+      "train_log_loss": 6.632913345798184e-05,
+      "test_n": 150,
+      "test_wrong": 26,
+      "test_error": 0.17333333333333334,
+      "test_log_loss": 1.011882564367564
+    },
+    {
+      "dataset": "dset1",
+      "trees": 1,
+      "train_n": 350,
+      "train_wrong": 84,
+      "train_error": 0.24,
+      "train_log_loss": 0.6368161933738825,
+      "test_n": 150,
+      "test_wrong": 37,
+      "test_error": 0.24666666666666667,
+      "test_log_loss": 0.6459018108640349
+    },
+    {
+      "dataset": "dset1",
+      "trees": 10,
+      "train_n": 350,
+      "train_wrong": 44,
+      "train_error": 0.12571428571428572,
+      "train_log_loss": 0.4018466631612532,
+      "test_n": 150,
+      "test_wrong": 28,
+      "test_error": 0.18666666666666668,
+      "test_log_loss": 0.4825006418281646
+    },
+    {
+      "dataset": "dset1",
+      "trees": 100,
+      "train_n": 350,
+      "train_wrong": 4,
+      "train_error": 0.011428571428571429,
+      "train_log_loss": 0.11774727579900232,
+      "test_n": 150,
+      "test_wrong": 22,
+      "test_error": 0.14666666666666667,
+      "test_log_loss": 0.32099796619070686
+    },
+    {
+      "dataset": "dset1",
+      "trees": 300,
+      "train_n": 350,
+      "train_wrong": 0,
+      "train_error": 0.0,
+      "train_log_loss": 0.02168622586324984,
+      "test_n": 150,
+      "test_wrong": 23,
+      "test_error": 0.15333333333333332,
+      "test_log_loss": 0.39436714636052034
+    },
+    {
+      "dataset": "dset1",
+      "trees": 1000,
+      "train_n": 350,
+      "train_wrong": 0,
+      "train_error": 0.0,
+      "train_log_loss": 0.00011736864777135911,
+      "test_n": 150,
+      "test_wrong": 25,
+      "test_error": 0.16666666666666666,
+      "test_log_loss": 0.7376317918453793
+    }
+  ],
+  "repeated_split_summary": [
+    {
+      "dataset": "dset0",
+      "trees": 1,
+      "splits": 20,
+      "train_error_mean": 0.4257142857142856,
+      "train_error_sd": 1.1390647892519134e-16,
+      "test_error_mean": 0.42666666666666664,
+      "test_error_sd": 5.695323946259567e-17,
+      "train_log_loss_mean": 0.6533548504501256,
+      "train_log_loss_sd": 0.003906975893662628,
+      "test_log_loss_mean": 0.6637225449877605,
+      "test_log_loss_sd": 0.005352739304141881
+    },
+    {
+      "dataset": "dset0",
+      "trees": 10,
+      "splits": 20,
+      "train_error_mean": 0.15028571428571427,
+      "train_error_sd": 0.020942353490235745,
+      "test_error_mean": 0.2743333333333333,
+      "test_error_sd": 0.03188245956745144,
+      "train_log_loss_mean": 0.49638517972447704,
+      "train_log_loss_sd": 0.011643808895002467,
+      "test_log_loss_mean": 0.5785502323063408,
+      "test_log_loss_sd": 0.015539643908287534
+    },
+    {
+      "dataset": "dset0",
+      "trees": 100,
+      "splits": 20,
+      "train_error_mean": 0.004,
+      "train_error_sd": 0.003976299279648339,
+      "test_error_mean": 0.17933333333333332,
+      "test_error_sd": 0.028523100312939136,
+      "train_log_loss_mean": 0.13355900417963612,
+      "train_log_loss_sd": 0.011877847839184556,
+      "test_log_loss_mean": 0.419669784321879,
+      "test_log_loss_sd": 0.0489440095443905
+    },
+    {
+      "dataset": "dset0",
+      "trees": 300,
+      "splits": 20,
+      "train_error_mean": 0.0,
+      "train_error_sd": 0.0,
+      "test_error_mean": 0.1763333333333333,
+      "test_error_sd": 0.028976699653463257,
+      "train_log_loss_mean": 0.021612790361360622,
+      "train_log_loss_sd": 0.0038153716912786985,
+      "test_log_loss_mean": 0.4796497550405265,
+      "test_log_loss_sd": 0.09946656348622174
+    },
+    {
+      "dataset": "dset0",
+      "trees": 1000,
+      "splits": 20,
+      "train_error_mean": 0.0,
+      "train_error_sd": 0.0,
+      "test_error_mean": 0.179,
+      "test_error_sd": 0.027974508028117392,
+      "train_log_loss_mean": 8.599687955978801e-05,
+      "train_log_loss_sd": 3.947554457184633e-05,
+      "test_log_loss_mean": 0.9179036703402726,
+      "test_log_loss_sd": 0.25289260711860256
+    },
+    {
+      "dataset": "dset1",
+      "trees": 1,
+      "splits": 20,
+      "train_error_mean": 0.28114285714285714,
+      "train_error_sd": 0.08804549161036497,
+      "test_error_mean": 0.3166666666666667,
+      "test_error_sd": 0.078001349515991,
+      "train_log_loss_mean": 0.6373284823438068,
+      "train_log_loss_sd": 0.002793072370159347,
+      "test_log_loss_mean": 0.6476245896195996,
+      "test_log_loss_sd": 0.005137824414568737
+    },
+    {
+      "dataset": "dset1",
+      "trees": 10,
+      "splits": 20,
+      "train_error_mean": 0.11357142857142857,
+      "train_error_sd": 0.012363106475258644,
+      "test_error_mean": 0.20666666666666664,
+      "test_error_sd": 0.027614726133264562,
+      "train_log_loss_mean": 0.40109624844646224,
+      "train_log_loss_sd": 0.011394047913257014,
+      "test_log_loss_mean": 0.4804314069507981,
+      "test_log_loss_sd": 0.024914880211111184
+    },
+    {
+      "dataset": "dset1",
+      "trees": 100,
+      "splits": 20,
+      "train_error_mean": 0.009571428571428573,
+      "train_error_sd": 0.004173982120881091,
+      "test_error_mean": 0.1863333333333333,
+      "test_error_sd": 0.02977302048059638,
+      "train_log_loss_mean": 0.10537872068513701,
+      "train_log_loss_sd": 0.011531869358571246,
+      "test_log_loss_mean": 0.40789732556296954,
+      "test_log_loss_sd": 0.05715291408496322
+    },
+    {
+      "dataset": "dset1",
+      "trees": 300,
+      "splits": 20,
+      "train_error_mean": 0.0,
+      "train_error_sd": 0.0,
+      "test_error_mean": 0.1953333333333333,
+      "test_error_sd": 0.028621343199607314,
+      "train_log_loss_mean": 0.018175188755138995,
+      "train_log_loss_sd": 0.0037140169882242903,
+      "test_log_loss_mean": 0.5362609746347804,
+      "test_log_loss_sd": 0.09702333702072724
+    },
+    {
+      "dataset": "dset1",
+      "trees": 1000,
+      "splits": 20,
+      "train_error_mean": 0.0,
+      "train_error_sd": 0.0,
+      "test_error_mean": 0.19933333333333333,
+      "test_error_sd": 0.028440972010268722,
+      "train_log_loss_mean": 8.114919200704976e-05,
+      "train_log_loss_sd": 4.914947040016951e-05,
+      "test_log_loss_mean": 1.0739336445897956,
+      "test_log_loss_sd": 0.2484923090870062
+    }
+  ],
+  "versions": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "scipy": "1.16.3",
+    "scikit-learn": "1.7.2",
+    "matplotlib": "3.10.7"
+  },
+  "elapsed_seconds": 30.462960916978773
+}

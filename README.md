@@ -4,7 +4,8 @@ Reproducible course homework code. Each assignment lives in its own directory.
 
 - [homework_1/](homework_1/): theoretical solutions, ALE residual diagnostics, and custom PyTorch models.
 - [homework_2/](homework_2/): taxi uncertainty, retail categorical encodings, and random features versus an MLP.
-- Future assignments will use `homework_3/`, `homework_4/`, and so on when completed.
+- [homework_3/](homework_3/): Poisson boosting, hyperparameter selection, and boosting generalization experiments.
+- Future assignments will use `homework_4/` and so on when completed.
 
 Course repository: https://github.com/richard0525/foundations-machine-learning-ai
 
@@ -62,3 +63,20 @@ data download, or GPU is needed. The required unlabeled test predictions are
 [the RKS CSV](homework_2/results/rks_test_predictions.csv) and
 [the MLP CSV](homework_2/results/mlp_test_predictions.csv), each with 200 rows
 and no header. The experiments, saved results, and report live under `homework_2/`.
+
+## Run Homework 3
+
+See [Homework 3 instructions](homework_3/README.md) and the
+[solution PDF](homework_3/results/HW3_Solutions.pdf). Use a separate Python 3.12 environment:
+
+```bash
+python3.12 -m venv .venv-hw3
+.venv-hw3/bin/python -m pip install -r homework_3/requirements-lock.txt
+.venv-hw3/bin/python homework_3/run.py --jobs 4
+.venv-hw3/bin/python homework_3/verify.py
+```
+
+All input data, 1,040 grid-search scores, boosting results, predictions, and
+figures are included. No account, API key, or GPU is needed. The code checks data
+hashes and can regenerate every numerical result. To rebuild the written PDF,
+install LaTeX and run `.venv-hw3/bin/python homework_3/build_report.py`.

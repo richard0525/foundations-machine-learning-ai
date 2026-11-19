@@ -1,0 +1,18 @@
+{
+  "files": {
+    "assignment_hw3.pdf": "6733866a2887536d3c21447f4fd428fcf0e14c82102e575bf999d74d5651f7d9",
+    "dset0-1.csv": "4c8fd3472e93f82f262407ccfb245db19300668376f5ec4040d7699cab9d3c0f",
+    "dset1-1.csv": "6e6fda5c47a636701029a6d9b7d9c44233ce609d50de1ce34105b90c3650cb1a",
+    "winequality-white.csv": "76c3f809815c17c07212622f776311faeb31e87610d52c26d87d6e361b169836",
+    "winequality.names": "15d215e73b39105952380fd487e4ce1bf5a6b83a425abb285c2ec55193d3ca92"
+  },
+  "sources": {
+    "dset0-1.csv": "Instructor-supplied HW3 file, unchanged",
+    "dset1-1.csv": "Instructor-supplied HW3 file, unchanged",
+    "assignment_hw3.pdf": "Instructor-supplied assignment, unchanged",
+    "winequality-white.csv": "https://archive.ics.uci.edu/static/public/186/wine+quality.zip",
+    "winequality.names": "https://archive.ics.uci.edu/static/public/186/wine+quality.zip"
+  },
+  "wine_dataset_reference": "P. Cortez, A. Cerdeira, F. Almeida, T. Matos and J. Reis (2009), Modeling wine preferences by data mining from physicochemical properties, Decision Support Systems 47(4), 547-553; UCI Wine Quality dataset https://doi.org/10.24432/C56S3T",
+  "download_date": "2026-11-19"
+}
